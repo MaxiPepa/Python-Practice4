@@ -1,3 +1,4 @@
+"""
 Desarrollar un sistema que integre una base de datos con SQLite para una peluquería canina. 
 Mediante un menú de opciones llevar a cabo las siguientes posibilidades. 
 1- Cargar Perros. 
@@ -13,3 +14,32 @@ Mostrar ordenadamente todos los perros cargados.
 0- Salir del menú. 
 
 Punto adicional: usar la estructura de manejo de errores de python para que los datos ingresados sean correctos.
+"""
+from class_menu import *
+
+program = Menu()
+program.menu()
+
+"""
+import sqlite3
+
+connection = sqlite3.connect("peluqueria")
+
+cursor = connection.cursor()
+
+cursor.execute(
+    '''CREATE TABLE PERROS(
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        NOMBRE_PERRO VARCHAR (50) UNIQUE,
+        NOMBRE_DUEÑO VARCHAR (50),
+        DOMICILIO VARCHAR (50),
+        TELEFONO INTEGER,
+        BAÑO INTEGER,
+        CORTE INTEGER)
+    '''
+)
+
+
+connection.commit()
+connection.close()
+"""
