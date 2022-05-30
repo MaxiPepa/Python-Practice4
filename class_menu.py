@@ -29,10 +29,32 @@ class Menu:
         nuevo_perro = Perro(nombre, dueno, domicilio, telefono, bano, corte)
         nuevo_perro.add_perro()
 
-    def ingresar_perro(self):
-        nombre = input("Ingrese el nombre del perro: ")
-        
+    def modify_perro(self):
+        nombre = input("Ingrese el nompre del perro: ")
+        opcion = int(input("Ingrese 1 si quiere cambioar el domicilio o 2 si quiere cambiar el teléfono: "))
+        while opcion < 1 or opcion > 2:
+            opcion = int(input("Ingrese una opción válida: "))
 
+        if opcion == 1:
+            domicilio = input("Ingrese el nuevo domicilio: ")
+            Perro.modify_domicilio(domicilio, nombre)
+        else:
+            telefono = int(input("ingrese el nuevo teléfono: "))
+            while type(telefono) != int:
+                telefono = int(input("El teléfono debe ser un número, ingrese de nuevo: "))
+            Perro.modify_telefono(telefono, nombre)
+
+    def delete_perro(self):
+        nombre = input("Ingrese el nompre del perro: ")
+        chequeo = int(input("Ingrese 1 si esta seguro que quiere borrar, de lo contrario ingrese 2: "))
+        while chequeo < 1 or chequeo > 2:
+            chequeo = int(input("Ingrese una opción válida: "))
+        
+        if chequeo == 1:
+            Perro.delete_perro(nombre)
+        else:
+            return
+        
     def menu(self):
         loop = True
         while loop:
@@ -48,9 +70,9 @@ class Menu:
             if opcion == 1:
                 self.ingresar_perro()
             elif opcion == 2:
-                pass
+                self.modify_perro()
             elif opcion == 3:
-                pass
+                self.delete_perro()
             elif opcion == 4:
                 pass
             elif opcion == 5:
