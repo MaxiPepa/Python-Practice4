@@ -39,3 +39,21 @@ class Perro:
         conexion.cursor.execute("DELETE FROM PERROS WHERE NOMBRE_PERRO='{}'".format(nombre))
         conexion.connection.commit()
         conexion.close_connection()
+
+    @classmethod
+    def add_visit(self, nombre, bano, corte):
+        conexion = Connection()
+        conexion.open_connection()
+        conexion.cursor.execute("UPDATE PERROS SET BAÑO = BAÑO + {} WHERE NOMBRE_PERRO='{}'".format(bano, nombre))
+        conexion.cursor.execute("UPDATE PERROS SET CORTE = CORTE + {} WHERE NOMBRE_PERRO='{}'".format(corte, nombre))
+        conexion.connection.commit()
+        conexion.close_connection()
+
+    @classmethod
+    def return_table(self):
+        conexion = Connection()
+        conexion.open_connection()
+        conexion.cursor.execute("SELECT * FROM PERROS")
+        table = conexion.cursor.fetchall()
+        conexion.close_connection()
+        return table

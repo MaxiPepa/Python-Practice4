@@ -1,9 +1,10 @@
+from tracemalloc import start
 from class_connection import *
 from class_perro import *
 
 class Menu:
 
-    def ingresar_perro(self):
+    def insert_perro(self):
         nombre = input("Ingrese nombre del perro: ")
         dueno = input("Ingrese nombre del dueño: ")
         domicilio = input("Ingrese domicilio: ")
@@ -54,7 +55,30 @@ class Menu:
             Perro.delete_perro(nombre)
         else:
             return
-        
+    
+    def add_visit(self):
+        nombre = input("Ingrese el nompre del perro: ")
+        opcion_visita = int(input("Ingrese 1 si vino por baño, 2 si vino por corte o 3 si vino por ambos: "))
+        while opcion_visita < 1 or opcion_visita > 3:
+            opcion_visita = int(input("Ingrese una opción válida: "))
+
+        if opcion_visita == 1:
+            bano = 1
+            corte = 0
+        elif opcion_visita == 2:
+            corte = 1
+            bano = 0
+        else:
+            bano = 1
+            corte = 1
+
+        Perro.add_visit(nombre, bano, corte)
+    def show_table(self):
+        table = Perro.return_table()
+        print("ID ------ NOMBRE ------ DUEÑO ------ DOMICILIO ------ TELÉFONO ------ BAÑOS ------ CORTES")
+        for datos in table:
+            print(str(datos[0]) + " ------ " + str(datos[1]) + " ------ " + str(datos[2]) + " ------ " + str(datos[3]) + " ------ " + str(datos[4]) + " ------ " + str(datos[5]) + " ------ " + str(datos[6]))
+
     def menu(self):
         loop = True
         while loop:
@@ -68,15 +92,15 @@ class Menu:
             print("0- Salir del menú")
             opcion = int(input("Elija la opción: "))
             if opcion == 1:
-                self.ingresar_perro()
+                self.insert_perro()
             elif opcion == 2:
                 self.modify_perro()
             elif opcion == 3:
                 self.delete_perro()
             elif opcion == 4:
-                pass
+                self.add_visit()
             elif opcion == 5:
-                pass
+                self.show_table()
             elif opcion == 0:
                 print("Hasta Pronto")
                 loop = False
